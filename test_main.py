@@ -40,7 +40,7 @@ def display_images(image_paths):
     # Adjust the layout and display the images to the user
     plt.subplots_adjust(wspace=0.7, hspace=0.8)
     manager = plt.get_current_fig_manager()
-    manager.resize(1000, 700)
+    manager.resize(800, 700)
     plt.tight_layout()
     plt.show()
 

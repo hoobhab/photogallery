@@ -2,7 +2,6 @@ import zmq
 import os
 from PIL import Image
 import io
-import json
 
 # Set up the connection for the zmq
 context = zmq.Context()
