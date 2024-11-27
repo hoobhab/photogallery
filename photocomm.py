@@ -45,27 +45,17 @@ def display_images(image_paths):
     plt.show()
 
 
-def request_images():
-    """Request image paths from the server based on user input."""
-    while True:
-        # Get the topic from the user
-        topic = input(
-            "Enter a topic to view images (or 'quit' to exit): ").strip()
+def request_images(topic):
+    # Send the topic to the microservice
+    socket.send_string(topic)
 
-        if topic.lower() == 'quit':
-            print("Exiting the program.")
-            break
+    # Wait for the response from the server
+    response = socket.recv_json()
 
-        # Send the topic to the microservice
-        socket.send_string(topic)
-
-        # Wait for the response from the server
-        response = socket.recv_json()
-
-        if 'images' in response and response['images']:
-            display_images(response['images'])
-        else:
-            print(f"No images found for the topic: {topic}")
+    if 'images' in response and response['images']:
+        display_images(response['images'])
+    else:
+        print(f"No images found for the topic: {topic}")
 
 
 if __name__ == "__main__":
